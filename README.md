@@ -12,8 +12,8 @@ A full-stack application for intelligent GEO insights.
 
 ### Backend
 ```bash
-cd backend
 pip install -r requirements.txt
+cd backend
 uvicorn app.main:app --reload
 
 
