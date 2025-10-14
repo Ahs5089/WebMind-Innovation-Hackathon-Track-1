@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Intelligent GEO Dashboard — Frontend</title>
+
+  <!-- Google fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Chart.js for charts -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="styles/style.css" />
+</head>
+<body>
+  <div class="container">
+    <header class="header">
+      <div class="brand">
+        <div class="logo">🌐</div>
+        <div>
+          <h1>Intelligent GEO Dashboard</h1>
+          <p class="subtitle">Multi-LLM visibility & prompt discovery — frontend</p>
+        </div>
+      </div>
+      <div class="header-actions">
+        <button id="healthBtn" class="btn ghost">Check Backend</button>
+        <div id="healthStatus" class="pill">—</div>
+      </div>
+    </header>
+
+    <main class="grid">
+      <!-- Left column: controls -->
+      <section class="card control">
+        <h2>Prompt & Models</h2>
+
+        <label class="label">Prompt</label>
+        <textarea id="prompt" placeholder="Example: What are the best SEO tools for 2025?" rows="4"></textarea>
+
+        <label class="label">Target domain (optional)</label>
+        <input id="targetDomain" placeholder="e.g. uok.edu.pk" />
+
+        <label class="label">Select models</label>
+        <div class="models">
+          <label><input type="checkbox" value="Groq (LLaMA 3.1)" checked /> Groq (LLaMA 3.1)</label>
+          <label><input type="checkbox" value="Claude 3.5 Sonnet" checked /> Claude 3.5 Sonnet</label>
+          <label><input type="checkbox" value="Google Gemini" checked /> Google Gemini</label>
+          <label><input type="checkbox" value="GPT-4 (OpenRouter)" /> GPT-4 (OpenRouter)</label>
+          <label><input type="checkbox" value="HuggingFace" /> HuggingFace</label>
+        </div>
+
+        <div class="actions-row">
+          <button id="runBtn" class="btn primary">🚀 Run Multi-LLM Analysis</button>
+          <button id="exportBtn" class="btn" disabled>⬇️ Export JSON</button>
+        </div>
+
+        <div id="progress" class="progress hidden">
+          <div class="progress-bar" id="progressBar"></div>
+        </div>
+
+        <div id="status" class="status"></div>
+      </section>
+
+      <!-- Right column: results -->
+      <section class="card results">
+        <h2>Results</h2>
+
+        <div id="summaryCard" class="metric-card hidden">
+          <h3>Summary</h3>
+          <p id="summaryText"></p>
+        </div>
+
+        <div id="topMetrics" class="metrics-grid hidden">
+          <div class="metric">
+            <div class="metric-title">Top Performer</div>
+            <div id="topPerformer" class="metric-value">—</div>
+          </div>
+          <div class="metric">
+            <div class="metric-title">Unique Domains</div>
+            <div id="uniqueDomains" class="metric-value">—</div>
+          </div>
+          <div class="metric">
+            <div class="metric-title">Total Citations</div>
+            <div id="totalCitations" class="metric-value">—</div>
+          </div>
+          <div class="metric">
+            <div class="metric-title">Avg Response</div>
+            <div id="avgResponse" class="metric-value">—</div>
+          </div>
+        </div>
+
+        <div id="panels" class="tabs hidden">
+          <div class="tab-buttons">
+            <button class="tab-btn active" data-tab="responses">Responses</button>
+            <button class="tab-btn" data-tab="domains">Domains</button>
+            <button class="tab-btn" data-tab="models">Model Comparison</button>
+            <button class="tab-btn" data-tab="metrics">Metrics</button>
+          </div>
+
+          <div class="tab-content active" id="responses">
+            <div id="responsesContainer"></div>
+          </div>
+
+          <div class="tab-content" id="domains">
+            <canvas id="domainsChart" height="200"></canvas>
+          </div>
+
+          <div class="tab-content" id="models">
+            <canvas id="modelsChart" height="200"></canvas>
+          </div>
+
+          <div class="tab-content" id="metrics">
+            <div id="metricsTableWrap"></div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div>Built for Track: AI Visibility & Prompt Discovery — Frontend demo</div>
+      <div class="muted">Connects to backend at <code>/api/*</code></div>
+    </footer>
+  </div>
+
+  <script src="scripts/app.js"></script>
+</body>
+</html>
